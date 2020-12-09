@@ -11,13 +11,16 @@ function OnlineBoard() {
   useEffect(() => {
     const socket = socketIOClient(ENDPOINT);
 
-    socket.emit("onlineUser", "online user name");
+    socket.emit("onlineUser", localStorage.getItem("username"));
 
     socket.on("onlineList", (data) => {
       setOnlineUser(data);
     });
 
-    return () => socket.disconnect();
+    return () => {
+      socket.emit("offlineUser", localStorage.getItem("username"));
+      socket.disconnect();
+    };
   }, []);
 
   useEffect(() => {
