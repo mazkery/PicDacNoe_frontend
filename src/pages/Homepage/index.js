@@ -1,5 +1,13 @@
-import React from 'react';
+import React from "react";
+import OnlineBoard from "../OnlineBoard/index";
 
-export default function Homepage() {
-	return <div>This is Homepage.</div>;
+function Homepage() {
+  return (
+    <div>
+      <h1>Welcome to Homepage</h1>
+      <OnlineBoard />
+    </div>
+  );
 }
+
+export default Homepage;
