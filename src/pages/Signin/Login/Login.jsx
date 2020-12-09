@@ -20,12 +20,13 @@ export default function Login() {
 		login(data)
 			.then((res) => {
 				console.log(res);
-				alert(res.data.info.message);
+				// alert(res.data.info.message);
 				localStorage.setItem('token', res.data.user.token);
 				localStorage.setItem('username', inputValues.username);
 			})
 			.catch((error) => {
-				alert(error.response.data.message.message);
+				console.log(error);
+				// alert(error.response.data.message.message);
 				// setErrorMessage(error.response.data.message);
 			});
 	};
