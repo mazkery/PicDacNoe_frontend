@@ -3,20 +3,32 @@ import { Table, Container } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import socketIOClient from "socket.io-client";
 const ENDPOINT = "http://localhost:5000";
+let onlineList;
 
 function OnlineBoard() {
   const [onlineUser, setOnlineUser] = useState([]);
 
   useEffect(() => {
-    debugger;
     const socket = socketIOClient(ENDPOINT);
-    socket.emit("online", "test data for sending");
-    socket.on("FromAPI", (data) => {
-      console.log(data);
+
+    socket.emit("onlineUser", "online user name");
+
+    socket.on("onlineList", (data) => {
+      setOnlineUser(data);
     });
 
     return () => socket.disconnect();
   }, []);
+
+  useEffect(() => {
+    onlineList = onlineUser.map((username) => {
+      return (
+        <tr>
+          <td>{username}</td>
+        </tr>
+      );
+    });
+  }, [onlineUser]);
 
   return (
     <div className="w-25 m-auto">
@@ -26,14 +38,7 @@ function OnlineBoard() {
             <th>Online Member</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>Mark</td>
-          </tr>
-          <tr>
-            <td>Jacob</td>
-          </tr>
-        </tbody>
+        <tbody>{onlineList}</tbody>
       </Table>
     </div>
   );
