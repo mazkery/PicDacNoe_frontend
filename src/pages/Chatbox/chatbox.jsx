@@ -1,46 +1,44 @@
 import { React, useState, useEffect } from "react";
-import MessagesPanel from './messagepanel';
-import { socketClient } from 'socket.io-client';
+import MessagesPanel from "./messagepanel";
+import socketClient from "socket.io-client";
 import "./chatbox.css";
 const SERVER = "http://localhost:5000";
 
 function ChatBox(props) {
   const [room, setRoom] = useState(props.room);
-  const [user1, setUser1] = useEffect(props.user1);
-  const [user2, setUser2] = useEffect(props.user2);
+  const [user1, setUser1] = useState(props.user1);
+  const [socket, setSocket] = useState();
   const configureSocket = () => {
     var socket = socketClient(SERVER);
-    socket.on("connection", () => {
-      if (this.state.channel) {
-        this.handleChannelSelect(this.state.channel.id);
-      }
-    });
     socket.on("message", (message) => {
-      let channels = this.state.channels;
-      channels.forEach((c) => {
-        if (c.id === message.channel_id) {
-          if (!c.messages) {
-            c.messages = [message];
-          } else {
-            c.messages.push(message);
-          }
+      if (room === message.room) {
+        if (!room.messages) {
+          room.messages = [message];
+        } else {
+          room.messages.push(message);
         }
-      });
-      this.setState({ channels });
+      }
+
+      setRoom(room);
     });
-    this.socket = socket;
+    setSocket(socket);
   };
-  const handleSendMessage = (channel_id, text) => {
-    this.socket.emit("send-message", {
-      channel_id,
+  const handleSendMessage = (room, text) => {
+    socket.emit("send-message", {
+      room,
       text,
-      senderName: this.socket.id,
+      senderName: socket.id,
       id: Date.now(),
     });
   };
+  useEffect(() => {
+    configureSocket();
+    console.log("ahihi");
+    console.log(room);
+  }, []);
   return (
     <div classname="chat-app">
-      <MessagesPanel />
+      <MessagesPanel onSendMessage={handleSendMessage} room={room} />
     </div>
   );
 }
