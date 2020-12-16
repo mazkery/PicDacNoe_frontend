@@ -16,8 +16,6 @@ ul {
 }
 
 .game-board {
-	background-color: aqua;
-
 	width: auto;
 	overflow: scroll;
 }
