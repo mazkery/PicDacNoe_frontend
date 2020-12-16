@@ -24,7 +24,7 @@ function App() {
 					<Route exact path='/dashboard' component={Homepage} />
 					/** Testing route (Delete later) */
 					<Route exact path='/test' component={ChatBox} />
-					{/* <Route exact path='/test01' component={GameMatch} /> */}
+					<Route exact path='/test01' component={GameMatch} />
 				</Switch>
 			</Router>
 		</div>
