@@ -3,34 +3,37 @@ import { Table, Container } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import socketIOClient from "socket.io-client";
 const ENDPOINT = "http://localhost:5000";
-let onlineList;
+const socket = socketIOClient(ENDPOINT);
 
 function OnlineBoard() {
   const [onlineUser, setOnlineUser] = useState([]);
+  const [onlineList, setOnlineList] = useState([]);
 
   useEffect(() => {
-    const socket = socketIOClient(ENDPOINT);
-
     socket.emit("onlineUser", localStorage.getItem("username"));
-
-    socket.on("onlineList", (data) => {
-      setOnlineUser(data);
-    });
 
     return () => {
       socket.emit("offlineUser", localStorage.getItem("username"));
-      socket.disconnect();
     };
   }, []);
 
+  socket.on("onlineList", (data) => {
+    let usernameList = [];
+    Object.keys(data).map((socketId) => {
+      usernameList.push(data[socketId]);
+    });
+    setOnlineUser(usernameList);
+  });
+
   useEffect(() => {
-    onlineList = onlineUser.map((username) => {
+    let List = onlineUser.map((username) => {
       return (
         <tr>
           <td>{username}</td>
         </tr>
       );
     });
+    setOnlineList(List);
   }, [onlineUser]);
 
   return (

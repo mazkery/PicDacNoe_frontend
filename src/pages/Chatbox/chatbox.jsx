@@ -1,13 +1,13 @@
 import { React, useState, useEffect } from "react";
-import MessagesPanel from './messagepanel';
-import { socketClient } from 'socket.io-client';
+import MessagesPanel from "./messagepanel";
+import { socketClient } from "socket.io-client";
 import "./chatbox.css";
 const SERVER = "http://localhost:5000";
 
 function ChatBox(props) {
   const [room, setRoom] = useState(props.room);
-  const [user1, setUser1] = useEffect(props.user1);
-  const [user2, setUser2] = useEffect(props.user2);
+  const [user1, setUser1] = useState(props.user1);
+  const [user2, setUser2] = useState(props.user2);
   const configureSocket = () => {
     var socket = socketClient(SERVER);
     socket.on("connection", () => {
