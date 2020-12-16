@@ -2,13 +2,9 @@ import React from 'react';
 
 function Square(props) {
 	console.log(props.highLight);
+	const classname = 'square' + (props.highLight ? ' text-warning font-weight-bolder' : '');
 	return (
-		<button
-			className={
-				'square' + (props.highLight ? ' text-warning font-weight-bolder' : '')
-			}
-			onClick={props.onClick}
-		>
+		<button className={classname} onClick={props.onClick}>
 			{props.value}
 		</button>
 	);

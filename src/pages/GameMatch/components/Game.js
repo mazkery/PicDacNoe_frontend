@@ -49,14 +49,13 @@ function Game() {
 		}));
 	}
 
-	const [theGame, setTheGame] = useState(getInitialState(15));
+	const [theGame, setTheGame] = useState(getInitialState(50));
 
 	// Render
 	const historyArray = theGame.history;
 	const current = historyArray[theGame.stepNumber];
-	// const win = calculateWinnerByAnalyzeTheWholeBoard(current.squares);
-
 	const win = calculateWinner(current.squares, current.savedMove[0], current.savedMove[1]);
+
 	// JSX: Move List
 	const moves = historyArray.map((step, move) => {
 		const desc = move ? 'Go to square [' + step.savedMove + ']' : 'Go to game start';
@@ -93,21 +92,16 @@ function Game() {
 		}
 	}
 	return (
-		<div className='container d-flex flex-column align-items-center'>
-			<div className='row'>
-				<div>
-					<div className='game-info d-flex justify-content-center mb-2'>
-						<div className='alert alert-primary'>{status}</div>
-					</div>
-					<div className='d-flex justify-content-center'>
-						<Board
-							className='game-board'
-							squares={current.squares}
-							onClick={(r, c) => handleClickSquare(r, c)}
-							highLightSquares={win ? win.line : []}
-						/>
-					</div>
-				</div>
+		<div className=''>
+			<div className='game-info '>
+				<div className='alert alert-primary'>{status}</div>
+			</div>
+			<div className=''>
+				<Board
+					squares={current.squares}
+					onClick={(r, c) => handleClickSquare(r, c)}
+					highLightSquares={win ? win.line : []}
+				/>
 			</div>
 		</div>
 	);

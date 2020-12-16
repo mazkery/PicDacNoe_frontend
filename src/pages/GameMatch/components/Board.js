@@ -18,21 +18,19 @@ function Board(props) {
 		row[i] = [];
 		for (let j = 0; j < boardSize; j++) {
 			const pos = [i, j];
-			// ref: https://stackoverflow.com/a/46975391
 			row[i].push(
 				renderSquare(
 					i,
 					j,
 					props.highLightSquares.some(
-						(r) =>
-							r.length === 2 && r.every((value, index) => pos[index] === value)
+						(r) => r.length === 2 && r.every((value, index) => pos[index] === value)
 					)
 				)
 			);
 		}
 		board.push(<div className='board-row'>{row[i]}</div>);
 	}
-	return <div className='board'>{board}</div>;
+	return <div className='game-board'>{board}</div>;
 }
 
 export default Board;

@@ -6,7 +6,7 @@ function GameMatch() {
 	return (
 		<div>
 			<h1>Welcome to The Game</h1>
-			<Game />
+			<Game classname='game' />
 		</div>
 	);
 }
