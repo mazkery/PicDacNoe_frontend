@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Table, Container } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import socketIOClient from "socket.io-client";
-const ENDPOINT = "http://localhost:5000";
-const socket = socketIOClient(ENDPOINT);
+import socket from "../../socket/socket";
 
 function OnlineBoard() {
   const [onlineUser, setOnlineUser] = useState([]);

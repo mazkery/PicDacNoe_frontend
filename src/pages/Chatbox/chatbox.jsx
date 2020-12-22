@@ -1,28 +1,16 @@
 import { React, useState, useEffect } from "react";
+import { Table } from "react-bootstrap";
 import MessagesPanel from "./messagepanel";
-import socketClient from "socket.io-client";
 import "./chatbox.css";
-const SERVER = "http://localhost:5000";
+import socket from "../../socket/socket";
 
 function ChatBox(props) {
   const [room, setRoom] = useState(props.room);
   const [user1, setUser1] = useState(props.user1);
-  const [socket, setSocket] = useState();
-  const configureSocket = () => {
-    var socket = socketClient(SERVER);
-    socket.on("message", (message) => {
-      if (room === message.room) {
-        if (!room.messages) {
-          room.messages = [message];
-        } else {
-          room.messages.push(message);
-        }
-      }
+  const [messageList, setMessageList] = useState([]);
+  const [messageDisplayList, setMessageDisplayList] = useState([]);
+  let messList = [];
 
-      setRoom(room);
-    });
-    setSocket(socket);
-  };
   const handleSendMessage = (room, text) => {
     socket.emit("send-message", {
       room,
@@ -31,14 +19,45 @@ function ChatBox(props) {
       id: Date.now(),
     });
   };
+
+  socket.on("message", (message) => {
+    if (room === message.room) {
+      if (message !== null || message !== "") {
+        messList = messageList;
+        messList.push(message);
+        setMessageList(messList);
+      }
+    }
+  });
+
   useEffect(() => {
-    configureSocket();
-    console.log("ahihi");
     console.log(room);
-  }, []);
+
+    let displayList = messageList.map((message) => {
+      return (
+        <tr>
+          <td>{message}</td>
+        </tr>
+      );
+    });
+    setMessageDisplayList(displayList);
+  }, [messList]);
+
   return (
     <div classname="chat-app">
-      <MessagesPanel onSendMessage={handleSendMessage} room={room} />
+      <div>
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>Messages</th>
+            </tr>
+          </thead>
+          <tbody>{messageList}</tbody>
+        </Table>
+      </div>
+      <div>
+        <MessagesPanel onSendMessage={handleSendMessage} room={room} />
+      </div>
     </div>
   );
 }
