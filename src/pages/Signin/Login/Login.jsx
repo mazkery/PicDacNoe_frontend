@@ -27,7 +27,7 @@ export default function Login() {
         })
         .catch((error) => {
           console.log(error);
-          // alert(error.response.data.message.message);
+          alert(error.response.data.message.message);
           // setErrorMessage(error.response.data.message);
         });
     }
@@ -64,9 +64,14 @@ export default function Login() {
         <button class="btn btn-lg btn-primary btn-block" type="submit">
           Login
         </button>
-        <br />
+        <hr />
         <LoginGG />
         <LoginFB />
+        <br />
+        <br />
+        <a className="form-signup" href="/signup">
+          Đăng ký tài khoản
+        </a>
       </form>
     </div>
   );

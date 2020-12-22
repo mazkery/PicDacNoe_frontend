@@ -1,51 +1,62 @@
-import { useState, React } from "react";
+import { useState, React, useEffect } from "react";
 import "./register.css";
 import axios from "axios";
 
 export default function Register() {
-  const [username, setUsername] = useState("");
-  const [pass, setPass] = useState("");
-  const [confirm, setConfirm] = useState("");
-  const act_register = () => {
-    if (pass !== confirm) {
-      alert("Password do not match!");
-      return;
+  const [submitInfo, setSubmitInfo] = useState({});
+  const [isSubmit, setIsSubmit] = useState(false);
+
+  useEffect(() => {
+    if (isSubmit === true) {
+      debugger;
+      if (submitInfo.password !== submitInfo.confirmPassword) {
+        alert("Password do not match!");
+      } else {
+        const data = {
+          username: submitInfo.username,
+          password: submitInfo.password,
+        };
+        axios
+          .post("https://dagk-back-end.herokuapp.com/user/register", data)
+          .then(function (response) {
+            alert("Registered");
+          })
+          .catch(function (error) {
+            alert(error);
+          });
+      }
     }
-    const data = { username: username, password: pass };
-    const postUser = async () => {
-      await axios
-        .post("https://dagk-back-end.herokuapp.com/user/register", data)
-        .then(function (response) {
-          alert("Registered");
-        })
-        .catch(function (error) {
-          alert(error);
-        });
-    };
-    postUser();
-  };
+  }, [submitInfo]);
+
   return (
     <div class="wrapper">
-      <form class="form-signin" action="#">
+      <form
+        class="form-signin"
+        onSubmit={(e) => {
+          e.preventDefault();
+          setSubmitInfo({
+            username: e.currentTarget.username.value,
+            password: e.currentTarget.password.value,
+            confirmPassword: e.currentTarget.confirmPassword.value,
+          });
+          setIsSubmit(true);
+        }}
+      >
         <h2 class="form-signin-heading">Register</h2>
         <input
-          onChange={(evt) => setUsername(evt.target.value)}
           type="text"
           class="form-control"
           name="username"
           placeholder="Username"
-          required="true"
+          required
           autofocus=""
-          value={username}
         />
         <input
-          onChange={(evt) => setPass(evt.target.value)}
-          value={pass}
           type="password"
           class="form-control"
           name="password"
           placeholder="Password"
-          required="true"
+          required
           style={{
             marginBottom: "0px",
             borderBottomLeftRadius: "0",
@@ -53,23 +64,14 @@ export default function Register() {
           }}
         />
         <input
-          value={confirm}
-          onChange={(evt) => setConfirm(evt.target.value)}
           type="password"
           class="form-control"
-          name="password"
+          name="confirmPassword"
           placeholder="Confirm password"
-          required="true"
+          required
         />
 
-        <button
-          class="btn btn-lg btn-primary btn-block"
-          type="submit"
-          onClick={(e) => {
-            e.preventDefault();
-            act_register();
-          }}
-        >
+        <button class="btn btn-lg btn-primary btn-block" type="submit">
           Register
         </button>
       </form>

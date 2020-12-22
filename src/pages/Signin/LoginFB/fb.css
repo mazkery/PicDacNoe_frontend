@@ -1,0 +1,11 @@
+.btnFacebook {
+  width: 165px;
+  height: 50px;
+  border-radius: 4px;
+  box-shadow: 10px 10px;
+  background: #3b5998;
+  color: white;
+  border: 0px transparent;
+  text-align: center;
+  font-size: small;
+}
