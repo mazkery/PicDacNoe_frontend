@@ -6,3 +6,6 @@
   justify-content: center;
   box-shadow: 7px 7px #dddddd;
 }
+.room:hover {
+  cursor: pointer;
+}

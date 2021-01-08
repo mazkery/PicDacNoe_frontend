@@ -1,10 +1,13 @@
 import { React, useState } from 'react'
 import './room.css'
 
-export default function Room(props) {
+export default function Room({ history, id }) {
+    const handleClick = () => {
+        history.push(`/game/${id}`)
+    }
     return (
-        <div className='room'>
-            {props.id}
+        <div className='room' onClick={() => handleClick()}>
+            {id}
         </div>
     )
 }

@@ -1,0 +1,27 @@
+.content-ranking {
+  margin-top: 3%;
+  width: 80%;
+  margin-left: 10%;
+  text-align: center;
+}
+.game {
+  float: left;
+  margin-left: 1%;
+}
+.result {
+  color: #5c95ff;
+  float: right;
+  margin-right: 1%;
+}
+.ranking {
+  max-height: 500px;
+  margin-bottom: 10px;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.user {
+  color: black;
+}
+.user:hover {
+  color: black;
+}

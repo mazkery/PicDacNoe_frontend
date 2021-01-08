@@ -15,7 +15,9 @@ code {
 .Navbar {
   background-color: #e5989b;
 }
-
 .div {
   align-content: center;
+}
+button {
+  width: auto;
 }

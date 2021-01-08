@@ -1,0 +1,24 @@
+.online {
+  height: 10px;
+}
+.onlinehead {
+  background-color: #e5989b;
+  text-align: left;
+  padding-left: 5%;
+  height: 40px;
+}
+.line {
+  height: 40px;
+  width: 100%;
+}
+.name {
+  margin-left: 5%;
+  float: left;
+}
+.onl {
+  margin-right: 5%;
+  float: right;
+  font-size: 12px;
+  text-align: left;
+  color: #7bf1a8;
+}

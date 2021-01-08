@@ -1,0 +1,19 @@
+.fix {
+  position: fixed;
+}
+.onlineboard {
+  background-color: #ffffff;
+  position: fixed;
+  width: 20%;
+  top: 7.5%;
+  left: 80%;
+  padding-top: 1%;
+}
+.online {
+  margin-left: 5%;
+}
+.searchbar {
+  justify-content: left;
+  margin-left: -1%;
+  width: 25%;
+}
