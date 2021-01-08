@@ -1,10 +1,7 @@
-import React, { useState } from "react";
-import Board from "./Board.js";
-import {
-	calculateWinner,
-	calculateWinnerByAnalyzeTheWholeBoard,
-} from "../CalculateWinner.service.js";
-import "../GameMatch.css";
+import React, { useState } from 'react';
+import Board from './Board.js';
+import { calculateWinner } from '../CalculateWinner.service.js';
+import '../GameMatch.css';
 
 function Game() {
 	function getInitialState(size) {
@@ -29,15 +26,11 @@ function Game() {
 		const current = history[history.length - 1];
 		const currentSquares = current.squares.slice().map((i) => i.slice());
 		if (
-			calculateWinner(
-				current.squares,
-				current.savedMove[0],
-				current.savedMove[1]
-			) ||
+			calculateWinner(current.squares, current.savedMove[0], current.savedMove[1]) ||
 			currentSquares[r][c]
 		)
 			return;
-		currentSquares[r][c] = theGame.nextIsX ? "X" : "O";
+		currentSquares[r][c] = theGame.nextIsX ? 'X' : 'O';
 		setTheGame((prevState) => ({
 			...prevState,
 			history: history.concat([{ squares: currentSquares, savedMove: [r, c] }]),
@@ -59,23 +52,16 @@ function Game() {
 	// Render
 	const historyArray = theGame.history;
 	const current = historyArray[theGame.stepNumber];
-	const win = calculateWinner(
-		current.squares,
-		current.savedMove[0],
-		current.savedMove[1]
-	);
+	const win = calculateWinner(current.squares, current.savedMove[0], current.savedMove[1]);
 
 	// JSX: Move List
 	const moves = historyArray.map((step, move) => {
-		const desc = move
-			? "Go to square [" + step.savedMove + "]"
-			: "Go to game start";
+		const desc = move ? 'Go to square [' + step.savedMove + ']' : 'Go to game start';
 		return (
 			<li key={move}>
 				<button
 					className={
-						"btn btn-outline-secondary " +
-						(move === theGame.stepNumber ? "font-weight-bolder" : "")
+						'btn btn-outline-secondary ' + (move === theGame.stepNumber ? 'font-weight-bolder' : '')
 					}
 					onClick={() => jumpTo(move)}
 				>
@@ -84,29 +70,29 @@ function Game() {
 			</li>
 		);
 	});
-	const historyMovesList = theGame.listAscending ? (
-		<ol start="0">{moves}</ol>
-	) : (
-			<ol tart="0" reversed>
-				{moves.reverse()}
-			</ol>
-		);
+	// const historyMovesList = theGame.listAscending ? (
+	// 	<ol start='0'>{moves}</ol>
+	// ) : (
+	// 	<ol tart='0' reversed>
+	// 		{moves.reverse()}
+	// 	</ol>
+	// );
 
 	// status
 	let status;
 	if (win) {
-		status = "Winner:" + win.winner;
+		status = 'Winner:' + win.winner;
 	} else {
 		if (theGame.stepNumber === theGame.boardSize * theGame.boardSize) {
 			status = "It's a tie";
 		} else {
-			status = "Next player: " + (theGame.nextIsX ? "X" : "O");
+			status = 'Next player: ' + (theGame.nextIsX ? 'X' : 'O');
 		}
 	}
 	return (
-		<div className="">
-			<div className="game-info ">
-				<div className="alert alert-primary">{status}</div>
+		<div className=''>
+			<div className='game-info '>
+				<div className='alert alert-primary'>{status}</div>
 			</div>
 			<div>
 				<Board
