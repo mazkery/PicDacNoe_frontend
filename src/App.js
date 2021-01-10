@@ -4,9 +4,10 @@ import Homepage from './pages/Homepage';
 import Signup from './pages/Signup';
 import Signin from './pages/Signin';
 import ChatBox from './pages/Chatbox/chatbox.jsx';
-import Game from './pages/GameMatch/components/Game'
+import GameMatch from './pages/GameMatch/index'
 import Profile from './pages/Profile/profile'
 import Ranking from './pages/Ranking/ranking'
+import History from './pages/History/history'
 
 function App() {
 	return (
@@ -18,8 +19,9 @@ function App() {
 					<Route path='/signin' exact component={Signin} />
 					<Route path='/dashboard' exact component={Homepage} />
 					<Route path='/chatbox' exact component={ChatBox} />
-					<Route path='/game/:id' exact component={Game} />
+					<Route path='/game/:id' exact component={GameMatch} />
 					<Route path='/ranking' exact component={Ranking} />
+					<Route path='/history/:id' exact component={History} />
 					<Route exact path='/:username' exact component={Profile}/>
 				</Switch>
 			</Router>

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Board from './Board.js';
 import { calculateWinner } from '../CalculateWinner.service.js';
 import '../GameMatch.css';
+import ChatBox from './chatbox'
+import CountDown from './countdown'
 
 function Game() {
 	function getInitialState(size) {
@@ -89,17 +91,47 @@ function Game() {
 			status = 'Next player: ' + (theGame.nextIsX ? 'X' : 'O');
 		}
 	}
+	const surrender = () => {
+		alert('Surrender');
+	}
+	const equalize = () => {
+		alert('Equalize');
+	}
+	
 	return (
-		<div className=''>
+		<div style={{ textAlign: 'left' }}>
 			<div className='game-info '>
 				<div className='alert alert-primary'>{status}</div>
 			</div>
-			<div>
+			<div className="board">
 				<Board
 					squares={current.squares}
 					onClick={(r, c) => handleClickSquare(r, c)}
 					highLightSquares={win ? win.line : []}
 				/>
+			</div>
+			<div className="at-right">
+				<div className='action'>
+					<div className='action-button' onClick={() => surrender()}>
+						<div className='flag'>
+							<i class="fas fa-flag"></i>
+						</div>
+						<div>Surrender</div>
+					</div>
+					<div className='action-button' onClick={() => equalize()}>
+						<div className='deal'>
+							<i class="fas fa-american-sign-language-interpreting"></i>
+						</div>
+						<div>Equalize</div>
+					</div>
+					<div></div>
+				</div>
+				<div className='count'>
+					<CountDown></CountDown>
+				</div>
+				<div>
+					<ChatBox></ChatBox>
+				</div>
 			</div>
 		</div>
 	);

@@ -1,11 +1,12 @@
 import React from 'react';
 import Game from './components/Game';
 import './GameMatch.css';
+import NavBar from '../../components/Navbar/navbar';
 
 function GameMatch() {
 	return (
 		<div>
-			<h1>Welcome to The Game</h1>
+			<NavBar></NavBar>
 			<Game classname='game' />
 		</div>
 	);

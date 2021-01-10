@@ -12,8 +12,19 @@
 .online {
   margin-left: 5%;
 }
+.bar {
+  text-align: left;
+}
 .searchbar {
   justify-content: left;
   margin-left: -1%;
   width: 25%;
+  display: inline-block;
+}
+.new {
+  display: inline-block;
+  margin-left: 2%;
+}
+.btn {
+  margin-top: -4%;
 }

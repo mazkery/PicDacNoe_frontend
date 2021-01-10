@@ -68,3 +68,41 @@ ul {
 .text-danger {
   color: #e63946 !important;
 }
+.board {
+  width: 50%;
+  display: inline-block;
+}
+.at-right {
+  display: inline-block;
+  width: 50%;
+  vertical-align: top;
+}
+.action {
+  text-align: left;
+}
+.action-button {
+  margin-top: 0%;
+  display: inline-block;
+  text-align: center;
+  justify-content: center;
+  margin-left: 10%;
+}
+.action-button:hover {
+  cursor: pointer;
+}
+.flag {
+  font-size: 200%;
+  color: #7bf1a8;
+}
+.deal {
+  font-size: 225%;
+  color: #08bdbd;
+}
+.count {
+  width: 50%;
+}
+.countdown {
+  margin-top: 20%;
+  text-align: center;
+  font-size: 700%;
+}

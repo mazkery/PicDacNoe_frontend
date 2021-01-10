@@ -13,9 +13,10 @@ const room = 1;
 function Homepage(props) {
   const history = useHistory();
   const [data, setData] = useState(['1', '2', '3', '4', '5', '6', '6']);
-  const [online,setOnline]=useState(['Phong', 'Duy', 'Nghi']);
+  const [online, setOnline] = useState(['Phong', 'Duy', 'Nghi']);
   const [key, setKey] = useState('');
   const handleClick = (id) => {
+    console.log(id);
     history.push(`/game/${id}`)
   };
   const search = () => { };
@@ -27,32 +28,33 @@ function Homepage(props) {
       <NavBar></NavBar>
       <br />
       <div className="ml-5 listroom" style={{ width: '75%' }}>
-        <div>
-          <form class="submit">
-            <div className='searchbar'>
-              <div className="input">
-                <input
-                  onChange={(evt) => setKey(evt.target.value)}
-                  type="text"
-                  class="form-control"
-                  placeholder="Search..."
-                  required="true"
-                  autofocus=""
-                  value={key}></input>
-              </div>
+        <div className="bar">
+          <div className='searchbar'>
+            <div className="input">
+              <input
+                onChange={(evt) => setKey(evt.target.value)}
+                type="text"
+                class="form-control"
+                placeholder="Search..."
+                required="true"
+                autofocus=""
+                value={key}></input>
             </div>
-          </form>
+          </div>
+          <div  className='new'>
+            <button type="button" class="btn btn-danger" onClick={()=>handleClick('123')}>New Room</button>
+          </div>
         </div>
         <Row class="row-board" style={{ marginTop: '4%' }}>
           <Col xs={4} style={{ marginBottom: '4%' }}>
-            <PlayNow onClick={handleClick}></PlayNow>
+            <PlayNow history={history}></PlayNow>
           </Col>
           {(() => {
             const elements = [];
             if (!key) {
               data.map((item) => elements.push(
                 <Col xs={4} style={{ marginBottom: '4%' }}>
-                    <Room history={history} id={item} ></Room>
+                  <Room history={history} id={item} ></Room>
                 </Col>
               ))
             }
@@ -61,7 +63,7 @@ function Homepage(props) {
                 if (item === key) {
                   elements.push(
                     <Col xs={4} style={{ marginBottom: '4%' }}>
-                        <Room history={history} id={item}></Room>
+                      <Room history={history} id={item}></Room>
                     </Col>
                   )
                 }

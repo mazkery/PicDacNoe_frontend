@@ -1,0 +1,31 @@
+.content {
+  margin-top: 3%;
+  width: 80%;
+  margin-left: 10%;
+  text-align: left;
+}
+.roomid {
+  font-size: 50px;
+}
+.winner {
+  font-size: 25px;
+  margin-top: 1%;
+}
+.point {
+  display: inline-block;
+}
+.list-group {
+  max-height: 350px;
+  margin-bottom: 10px;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.game {
+  float: left;
+  margin-left: 1%;
+}
+.result {
+  color: #5c95ff;
+  float: right;
+  margin-right: 1%;
+}
