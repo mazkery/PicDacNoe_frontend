@@ -13,9 +13,8 @@ function ChatBox(props) {
 
   const handleSendMessage = (room, text) => {
     socket.emit("send-message", {
-      room,
       text,
-      senderName: socket.id,
+      senderName: localStorage.getItem("username"),
       id: Date.now(),
     });
   };

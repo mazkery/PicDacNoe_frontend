@@ -1,38 +1,73 @@
 import { React, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { Row, Col, Form, FormControl, Button } from 'react-bootstrap';
-import OnlineBoard from "../OnlineBoard/index";
+import { Row, Col, Form, FormControl, Button } from "react-bootstrap";
 import ChatBox from "../Chatbox/chatbox.jsx";
 import NavBar from "../../components/Navbar/navbar";
 import PlayNow from "./components/playnow";
-import Room from './components/room';
-import Online from './components/online';
-import './index.css';
+import Room from "./components/room";
+import Online from "./components/online";
+import socket from "../../socket/socket";
+import "./index.css";
+const room = 1;
 
-function Homepage() {
+function Homepage(props) {
   const history = useHistory();
-  const [data, setData] = useState(['1', '2', '3', '4', '5', '6', '6']);
-  const [online, setOnline] = useState(['Phong', 'Duy', 'Nghi']);
-  const [key, setKey] = useState('');
-  const handleClick = (id) => {
-    if(localStorage.getItem('token')===null){
-      history.push('/signin');
-    }
-    else{
-      history.push(`/game/${id}`)
-    }
-  };
-  const search = () => { };
-  useEffect(() => {
+  const [roomList, setRoomList] = useState([]);
+  const [onlineUser, setOnlineUser] = useState([]);
+  const [newRoomId, setNewRoomId] = useState(-1);
+  const [key, setKey] = useState("");
 
-  }, [])
+  const handleCreateNewRoom = () => {
+    let id = 1;
+    let numberOfRoom = roomList.length;
+    for (id = 1; id <= numberOfRoom; id++) {
+      if (id <= numberOfRoom && !roomList.includes(id)) {
+        break;
+      }
+    }
+    debugger;
+    let newRoomList = roomList;
+    newRoomList.push(id);
+    setNewRoomId(id);
+    setRoomList(newRoomList);
+  };
+
+  useEffect(() => {
+    socket.emit("onlineUser", localStorage.getItem("username"));
+
+    return () => {
+      socket.emit("offlineUser", localStorage.getItem("username"));
+    };
+  }, []);
+
+  useEffect(() => {
+    if (newRoomId > 0) {
+      socket.emit("createRoom", newRoomId);
+      let Id = newRoomId;
+      setNewRoomId(-1);
+      history.push(`/game/${Id}`);
+    }
+  }, [newRoomId]);
+
+  socket.on("onlineList", (data) => {
+    let usernameList = [];
+    Object.keys(data).map((socketId) => {
+      usernameList.push(data[socketId]);
+    });
+    setOnlineUser(usernameList);
+  });
+
+  socket.on("onlineRoom", (roomList) => {
+    setRoomList(roomList);
+  });
+
   return (
     <div>
       <NavBar></NavBar>
       <br />
-      <div className="ml-5 listroom" style={{ width: '75%' }}>
+      <div className="ml-5 listroom" style={{ width: "75%" }}>
         <div className="bar">
-          <div className='searchbar'>
+          <div className="searchbar">
             <div className="input">
               <input
                 onChange={(evt) => setKey(evt.target.value)}
@@ -41,43 +76,51 @@ function Homepage() {
                 placeholder="Search..."
                 required="true"
                 autofocus=""
-                value={key}></input>
+                value={key}
+              ></input>
             </div>
           </div>
-          <div  className='new'>
-            <button type="button" class="btn btn-danger" onClick={()=>handleClick('123')}>New Room</button>
+          <div className="new">
+            <button
+              type="button"
+              class="btn btn-danger"
+              onClick={() => handleCreateNewRoom()}
+            >
+              New Room
+            </button>
           </div>
         </div>
-        <Row class="row-board" style={{ marginTop: '4%' }}>
-          <Col xs={4} style={{ marginBottom: '4%' }}>
+        <Row class="row-board" style={{ marginTop: "4%" }}>
+          <Col xs={4} style={{ marginBottom: "4%" }}>
             <PlayNow history={history}></PlayNow>
           </Col>
           {(() => {
             const elements = [];
             if (!key) {
-              data.map((item) => elements.push(
-                <Col xs={4} style={{ marginBottom: '4%' }}>
-                  <Room history={history} id={item} ></Room>
-                </Col>
-              ))
-            }
-            else {
-              data.map((item) => {
-                if (item === key) {
+              roomList.map((roomId) =>
+                elements.push(
+                  <Col xs={4} style={{ marginBottom: "4%" }}>
+                    <Room history={history} id={roomId}></Room>
+                  </Col>
+                )
+              );
+            } else {
+              roomList.map((roomId) => {
+                if (roomId === key) {
                   elements.push(
-                    <Col xs={4} style={{ marginBottom: '4%' }}>
-                      <Room history={history} id={item}></Room>
+                    <Col xs={4} style={{ marginBottom: "4%" }}>
+                      <Room history={history} id={roomId}></Room>
                     </Col>
-                  )
+                  );
                 }
-              })
+              });
             }
             return elements;
           })()}
         </Row>
       </div>
       <div className="onlineboard">
-        <Online online={online}></Online>
+        <Online online={onlineUser}></Online>
       </div>
     </div>
   );
