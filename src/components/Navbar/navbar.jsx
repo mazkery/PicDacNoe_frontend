@@ -48,9 +48,12 @@ export default function NavBar() {
                   >
                     <Dropdown.Item tag={Link} href={'/' + localStorage.getItem('username')}>Profile</Dropdown.Item>
                     <Dropdown.Item tag={Link} href="/ranking">Ranking</Dropdown.Item>
-                    <Dropdown.Item eventKey="3">Active Item</Dropdown.Item>
                     <Dropdown.Divider />
-                    <Dropdown.Item eventKey="4">Log out</Dropdown.Item>
+                    <Dropdown.Item tag={Link} hreft='/' onClick={() => {
+                      window.localStorage.removeItem('username');
+                      window.localStorage.removeItem('token');
+                      window.location.reload()
+                    }} eventKey="4">Log out</Dropdown.Item>
                   </DropdownButton>
                 );
               }
