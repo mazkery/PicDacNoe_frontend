@@ -17,7 +17,6 @@ function App() {
           <Route path="/" exact component={Homepage} />
           <Route path="/signup" exact component={Signup} />
           <Route path="/signin" exact component={Signin} />
-          <Route path="/dashboard" exact component={Homepage} />
           <Route path="/chatbox" exact component={ChatBox} />
           <Route path="/game/:id" exact component={GameMatch} />
           <Route path="/ranking" exact component={Ranking} />

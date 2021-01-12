@@ -18,23 +18,27 @@ function Homepage(props) {
   const [key, setKey] = useState("");
 
   const handleCreateNewRoom = () => {
-    let id = 1;
-    let numberOfRoom = roomList.length;
-    for (id = 1; id <= numberOfRoom; id++) {
-      if (id <= numberOfRoom && !roomList.includes(id)) {
-        break;
-      }
+    if (localStorage.getItem('token') === null) {
+      history.push('/signin');
     }
-    debugger;
-    let newRoomList = roomList;
-    newRoomList.push(id);
-    setNewRoomId(id);
-    setRoomList(newRoomList);
+    else {
+      let id = 1;
+      let numberOfRoom = roomList.length;
+      for (id = 1; id <= numberOfRoom; id++) {
+        if (id <= numberOfRoom && !roomList.includes(id)) {
+          break;
+        }
+      }
+      debugger;
+      let newRoomList = roomList;
+      newRoomList.push(id);
+      setNewRoomId(id);
+      setRoomList(newRoomList);
+    }
   };
 
   useEffect(() => {
-    socket.emit("onlineUser", localStorage.getItem("username"));
-
+      socket.emit("onlineUser", localStorage.getItem("username"));
     return () => {
       socket.emit("offlineUser", localStorage.getItem("username"));
     };
@@ -50,6 +54,7 @@ function Homepage(props) {
   }, [newRoomId]);
 
   socket.on("onlineList", (data) => {
+    debugger;
     let usernameList = [];
     Object.keys(data).map((socketId) => {
       usernameList.push(data[socketId]);

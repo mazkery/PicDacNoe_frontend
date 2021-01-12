@@ -42,7 +42,6 @@ function Game() {
 			nextIsX: !theGame.nextIsX,
 		}));
 	}
-
 	function jumpTo(step) {
 		setTheGame((prevState) => ({
 			...prevState,
