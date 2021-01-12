@@ -1,15 +1,15 @@
-.content {
-  margin-top: 3%;
+.content-his {
+  margin-top: 1%;
   width: 80%;
   margin-left: 10%;
   text-align: left;
 }
-.roomid {
-  font-size: 50px;
+.roomid-his {
+  font-size: 40px;
 }
-.winner {
-  font-size: 25px;
-  margin-top: 1%;
+.winner-his {
+  font-size: 17px;
+  margin-top: 0%;
 }
 .point {
   display: inline-block;
@@ -28,4 +28,26 @@
   color: #5c95ff;
   float: right;
   margin-right: 1%;
+}
+.square-his {
+  background: #fff;
+  border: 1px solid #999;
+  float: left;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 34px;
+  margin-right: -1px;
+  margin-top: -1px;
+  margin-left: 0px;
+  border-radius: 0px;
+  padding: 0;
+  text-align: center;
+  height: 50px;
+  width: 50px;
+  color: #000000;
+}
+.game-board-his {
+  text-align: center;
+  padding-top: 1px;
+  padding-left: 5%;
 }

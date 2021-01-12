@@ -2,7 +2,8 @@ import { React, useState } from "react";
 import "./history.css";
 import { Row, Col } from 'react-bootstrap';
 import NavBar from "../../components/Navbar/navbar";
-import Board from '../GameMatch/components/Board';
+import Board from './Board';
+import Chat from './Chat'
 
 export default function History() {
     const [data, setData] = useState({
@@ -14,35 +15,44 @@ export default function History() {
         { id: "123", result: "Win" },
         { id: "456", result: "Lost" },
     ]);
+    const [messages, setMessages] = useState([
+        { user: "meo_lamphong", message: "Hello" },
+        { user: "duyquangtruong", message: "Hi" },
+        { user: "meo_lamphong", message: "How are you?" },
+        { user: "duyquangtruong", message: "I'm good" },
+        { user: "meo_lamphong", message: "Hello" },
+        { user: "duyquangtruong", message: "Hi" },
+        { user: "meo_lamphong", message: "How are you?" },
+        { user: "duyquangtruong", message: "I'm good" },
+        { user: "meo_lamphong", message: "Hello" },
+        { user: "duyquangtruong", message: "Hi" },
+        { user: "meo_lamphong", message: "How are you?" },
+        { user: "duyquangtruong", message: "I'm good" },
+        { user: "meo_lamphong", message: "Hello" },
+        { user: "duyquangtruong", message: "Hi" },
+        { user: "meo_lamphong", message: "How are you?" },
+        { user: "duyquangtruong", message: "I'm good" },
+        { user: "meo_lamphong", message: "Hello" },
+        { user: "duyquangtruong", message: "Hi" },
+        { user: "meo_lamphong", message: "How are you?" },
+        { user: "duyquangtruong", message: "I'm good" },
+
+    ])
     console.log(history);
     return (
         <div>
             <NavBar></NavBar>
-            <div className="content">
-                <div className="roomid">{'Room: ' + data.room}</div>
-                <div className="winner">{'Winner: ' + data.winner}</div>
-                <div className="winner">{'Competitor: ' + data.competitor}</div>
-                <br />
+            <div className="content-his">
+                <div className="roomid-his">{'Room: ' + data.room}</div>
+                <div className="winner-his">{'Winner: ' + data.winner}</div>
+                <div className="winner-his">{'Competitor: ' + data.competitor}</div>
                 <br />
                 <Row>
                     <Col xs={6}>
-                        <div>hiiii</div>
+                        <Board></Board>
                     </Col>
                     <Col xs={6}>
-                        <ul class="list-group">
-                            {(() => {
-                                const elements = [];
-                                history.map((item) =>
-                                    elements.push(
-                                        <li class="list-group-item">
-                                            <div className="game">{item.id}</div>
-                                            <div className="result">{item.result}</div>
-                                        </li>
-                                    )
-                                );
-                                return elements;
-                            })()}
-                        </ul>
+                        <Chat messages={messages}></Chat>
                     </Col>
                 </Row>
             </div>

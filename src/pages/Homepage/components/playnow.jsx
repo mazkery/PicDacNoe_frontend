@@ -3,7 +3,13 @@ import "./playnow.css";
 
 export default function PlayNow({ history }) {
   const handleClick = () => {
-    history.push('/game/123')
+    if (localStorage.getItem('token') === null) {
+      console.log('aaaaaa');
+      history.push('/signin');
+    }
+    else {
+      history.push('/game/123')
+    }
   }
   return (
     <div class="div-dash" onClick={() => handleClick()}>

@@ -122,7 +122,7 @@ function Game() {
 						<div className='deal'>
 							<i class="fas fa-american-sign-language-interpreting"></i>
 						</div>
-						<div>Equalize</div>
+						<div>Request a Draw</div>
 					</div>
 					<div></div>
 				</div>

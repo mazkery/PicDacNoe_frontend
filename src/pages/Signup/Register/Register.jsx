@@ -14,6 +14,9 @@ export default function Register() {
       } else {
         const data = {
           username: submitInfo.username,
+          firstname: submitInfo.firstname,
+          lastname: submitInfo.lastname,
+          email: submitInfo.email,
           password: submitInfo.password,
         };
         axios
@@ -37,6 +40,9 @@ export default function Register() {
           setSubmitInfo({
             username: e.currentTarget.username.value,
             password: e.currentTarget.password.value,
+            firstname: e.currentTarget.firstname.value,
+            lastname: e.currentTarget.lastname.value,
+            email: e.currentTarget.email.value,
             confirmPassword: e.currentTarget.confirmPassword.value,
           });
           setIsSubmit(true);
@@ -50,6 +56,42 @@ export default function Register() {
           placeholder="Username"
           required
           autofocus=""
+        />
+        <input
+          type="password"
+          class="form-control"
+          name="firstname"
+          placeholder="First name"
+          required
+          style={{
+            marginBottom: "0px",
+            borderBottomLeftRadius: "0",
+            borderBottomRightRadius: "0px",
+          }}
+        />
+        <input
+          type="password"
+          class="form-control"
+          name="lastname"
+          placeholder="Last name"
+          required
+          style={{
+            marginBottom: "0px",
+            borderBottomLeftRadius: "0",
+            borderBottomRightRadius: "0px",
+          }}
+        />
+        <input
+          type="password"
+          class="form-control"
+          name="email"
+          placeholder="Email"
+          required
+          style={{
+            marginBottom: "0px",
+            borderBottomLeftRadius: "0",
+            borderBottomRightRadius: "0px",
+          }}
         />
         <input
           type="password"
@@ -70,7 +112,7 @@ export default function Register() {
           placeholder="Confirm password"
           required
         />
-
+        <br /><br />
         <button class="btn btn-lg btn-primary btn-block" type="submit">
           Register
         </button>

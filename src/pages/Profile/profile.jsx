@@ -33,7 +33,9 @@ export default function Ranking() {
                         history.map((item) =>
                             elements.push(
                                 <li class="list-group-item">
-                                    <div className="game">{item.id}</div>
+                                    <a href={'/history/' + item.id}>
+                                        <div className="game" >{item.id}</div>
+                                    </a>
                                     <div className="result">{item.result}</div>
                                 </li>
                             )

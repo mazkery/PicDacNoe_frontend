@@ -24,7 +24,7 @@ export default function NavBar() {
               <Nav.Link href="/editpassword">EditPassword</Nav.Link>
             </Nav>
             {(() => {
-              if (null) {
+              if (localStorage.getItem('token') === null) {
                 return (
                   <div>
                     <a href="/signup">

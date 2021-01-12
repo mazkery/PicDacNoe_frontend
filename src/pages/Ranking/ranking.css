@@ -14,7 +14,7 @@
   margin-right: 1%;
 }
 .ranking {
-  max-height: 500px;
+  max-height: 500px !important;
   margin-bottom: 10px;
   overflow: auto;
   -webkit-overflow-scrolling: touch;

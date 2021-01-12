@@ -8,16 +8,19 @@ import PlayNow from "./components/playnow";
 import Room from './components/room';
 import Online from './components/online';
 import './index.css';
-const room = 1;
 
-function Homepage(props) {
+function Homepage() {
   const history = useHistory();
   const [data, setData] = useState(['1', '2', '3', '4', '5', '6', '6']);
   const [online, setOnline] = useState(['Phong', 'Duy', 'Nghi']);
   const [key, setKey] = useState('');
   const handleClick = (id) => {
-    console.log(id);
-    history.push(`/game/${id}`)
+    if(localStorage.getItem('token')===null){
+      history.push('/signin');
+    }
+    else{
+      history.push(`/game/${id}`)
+    }
   };
   const search = () => { };
   useEffect(() => {
