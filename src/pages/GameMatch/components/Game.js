@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Board from './Board.js';
 import { calculateWinner } from '../CalculateWinner.service.js';
 import '../GameMatch.css';
@@ -6,6 +6,8 @@ import ChatBox from './chatbox'
 import CountDown from './countdown'
 
 function Game() {
+	const [competitor, setCompetitor] = useState('meolamphong');
+	const [start, setStart] = useState(true);
 	function getInitialState(size) {
 		return {
 			history: [
@@ -83,6 +85,7 @@ function Game() {
 	// status
 	let status;
 	if (win) {
+		alert(win.winner + ' is winner!');
 		status = 'Winner:' + win.winner;
 	} else {
 		if (theGame.stepNumber === theGame.boardSize * theGame.boardSize) {
@@ -97,41 +100,66 @@ function Game() {
 	const equalize = () => {
 		alert('Equalize');
 	}
-	
+	const startGame = () => {
+		if (competitor === null) {
+			alert('Wait for your competitor!');
+		}
+		else {
+			setStart(false);
+		}
+	}
+	useEffect(() => { })
 	return (
-		<div style={{ textAlign: 'left' }}>
-			<div className='game-info '>
-				<div className='alert alert-primary'>{status}</div>
-			</div>
-			<div className="board">
-				<Board
-					squares={current.squares}
-					onClick={(r, c) => handleClickSquare(r, c)}
-					highLightSquares={win ? win.line : []}
-				/>
-			</div>
-			<div className="at-right">
-				<div className='action'>
-					<div className='action-button' onClick={() => surrender()}>
-						<div className='flag'>
-							<i class="fas fa-flag"></i>
+		<div>
+			{(() => {
+				const element = [];
+				if (start === true) {
+					element.push(
+						<div className='start-button' onClick={() => startGame()} >
+							<button type="button" class="btn btn-danger" style={{fontSize:'30px',width:'10%'}}> START</button>
 						</div>
-						<div>Surrender</div>
-					</div>
-					<div className='action-button' onClick={() => equalize()}>
-						<div className='deal'>
-							<i class="fas fa-american-sign-language-interpreting"></i>
+					);
+				}
+				else {
+					element.push(
+						<div style={{ textAlign: 'left' }}>
+							<div className='game-info '>
+								<div className='alert alert-primary'>{status}</div>
+							</div>
+							<div className="board">
+								<Board
+									squares={current.squares}
+									onClick={(r, c) => handleClickSquare(r, c)}
+									highLightSquares={win ? win.line : []}
+								/>
+							</div>
+							<div className="at-right">
+								<div className='action'>
+									<div className='action-button' onClick={() => surrender()}>
+										<div className='flag'>
+											<i class="fas fa-flag"></i>
+										</div>
+										<div>Surrender</div>
+									</div>
+									<div className='action-button' onClick={() => equalize()}>
+										<div className='deal'>
+											<i class="fas fa-american-sign-language-interpreting"></i>
+										</div>
+										<div>Request a Draw</div>
+									</div>
+									<div></div>
+								</div>
+								<div className='count'>
+									<CountDown></CountDown>
+								</div>
+							</div>
 						</div>
-						<div>Request a Draw</div>
-					</div>
-					<div></div>
-				</div>
-				<div className='count'>
-					<CountDown></CountDown>
-				</div>
-				<div>
-					<ChatBox></ChatBox>
-				</div>
+					);
+				}
+				return element;
+			})()}
+			<div>
+				<ChatBox></ChatBox>
 			</div>
 		</div>
 	);

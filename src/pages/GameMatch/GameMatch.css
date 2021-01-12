@@ -90,6 +90,11 @@ ul {
 .action-button:hover {
   cursor: pointer;
 }
+.start-button {
+  padding-top: 5%;
+  text-align: center;
+  margin-top: 5%;
+}
 .flag {
   font-size: 200%;
   color: #7bf1a8;

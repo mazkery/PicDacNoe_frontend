@@ -22,7 +22,7 @@ export default function Login() {
           console.log(res);
           // alert(res.data.info.message);
           localStorage.setItem("token", res.data.user.token);
-          localStorage.setItem("username", inputValues.email);
+          localStorage.setItem("username", res.data.user.name);
           history.push("/dashboard");
         })
         .catch((error) => {
@@ -48,7 +48,7 @@ export default function Login() {
       >
         <h2 class="form-signin-heading">Please login</h2>
         <input
-          type="text"
+          type="email"
           class="form-control"
           name="username"
           placeholder="Email Address"

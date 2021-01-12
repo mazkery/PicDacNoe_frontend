@@ -10,8 +10,6 @@ import Ranking from "./pages/Ranking/ranking";
 import History from "./pages/History/history";
 
 function App() {
-  window.localStorage.removeItem("username");
-  window.localStorage.removeItem("token");
   return (
     <div className="App">
       <Router>
