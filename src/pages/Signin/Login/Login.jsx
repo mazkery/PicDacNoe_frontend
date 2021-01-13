@@ -22,8 +22,9 @@ export default function Login() {
           console.log(res);
           // alert(res.data.info.message);
           localStorage.setItem("token", res.data.user.token);
-          localStorage.setItem("name", res.data.user.name);
-          localStorage.setItem("email", res.data.user.email);
+          localStorage.setItem("username", res.data.user.name);
+          localStorage.setItem("email", inputValues.email);
+          console.log(localStorage.getItem("email"));
           localStorage.setItem("id", res.data.user.id);
           history.push("/");
         })

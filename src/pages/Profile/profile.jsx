@@ -3,7 +3,8 @@ import axios from "axios";
 import "./profile.css";
 import NavBar from "../../components/Navbar/navbar";
 
-export default function Ranking() {
+export default function Profile({ match }) {
+    console.log('hii');
     const [data, setData] = useState([]);
     const [history, setHistory] = useState([
         { id: "123", result: "Win" },
@@ -11,7 +12,7 @@ export default function Ranking() {
     ]);
     useEffect(() => {
         const getProfile = async () => {
-            await axios.get(localStorage.getItem('API') + 'profile', { email: localStorage.getItem('email') })
+            await axios.post(localStorage.getItem('API') + 'users/profile', { email: match.params.email })
                 .then(function (response) {
                     console.log(response.data);
                     setData(response.data);
@@ -40,7 +41,7 @@ export default function Ranking() {
                                 <div className="profile-name">{data.user.name}</div>
                                 <div className="username">{data.user.email}</div>
                                 <div className="trophy">
-                                    <div className="point">{data.trophy} </div>
+                                    <div className="point">{data.user.game.win} </div>
                                     <div className="star">
                                         <i class="far fa-star"></i>
                                     </div>

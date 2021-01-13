@@ -10,6 +10,7 @@ import Ranking from "./pages/Ranking/ranking";
 import History from "./pages/History/history";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import EditPassword from "./pages/EditPassword/EditPassword";
+import EmailConfirm from './pages/EmailConfirm/index'
 
 function App() {
   return (
@@ -20,12 +21,13 @@ function App() {
           <Route path="/signup" exact component={Signup} />
           <Route path="/signin" exact component={Signin} />
           <Route path="/forgotpassword" exact component={ForgotPassword} />
-          <Route path="/editpassword" exact component={EditPassword} />
+          <Route path="/editpassword/:id" exact component={EditPassword} />
           <Route path="/chatbox" exact component={ChatBox} />
           <Route path="/game/:id" exact component={GameMatch} />
           <Route path="/ranking" exact component={Ranking} />
           <Route path="/history/:id" exact component={History} />
-          <Route exact path="/:username" exact component={Profile} />
+          <Route exact path="/:email" exact component={Profile} />
+          <Route path="/confirm/:id" exact component={EmailConfirm} />
         </Switch>
       </Router>
     </div>

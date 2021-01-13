@@ -21,7 +21,7 @@ export default function NavBar() {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
-              <Nav.Link href="/editpassword">EditPassword</Nav.Link>
+              <Nav.Link href={"/editpassword/" + localStorage.getItem('id')}>EditPassword</Nav.Link>
             </Nav>
             {(() => {
               if (localStorage.getItem('token') === null) {
@@ -46,7 +46,7 @@ export default function NavBar() {
                     variant='info'
                     title={localStorage.getItem('username')}
                   >
-                    <Dropdown.Item tag={Link} href={'/' + localStorage.getItem('id')}>Profile</Dropdown.Item>
+                    <Dropdown.Item tag={Link} href={'/' + localStorage.getItem('email')}>Profile</Dropdown.Item>
                     <Dropdown.Item tag={Link} href="/ranking">Ranking</Dropdown.Item>
                     <Dropdown.Divider />
                     <Dropdown.Item tag={Link} hreft='/' onClick={() => {
