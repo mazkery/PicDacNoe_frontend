@@ -22,8 +22,9 @@ export default function Login() {
           console.log(res);
           // alert(res.data.info.message);
           localStorage.setItem("token", res.data.user.token);
-          localStorage.setItem("username", res.data.user.name);
-          history.push("/dashboard");
+          localStorage.setItem("name", res.data.user.name);
+          localStorage.setItem("email", res.data.user.email);
+          history.push("/");
         })
         .catch((error) => {
           console.log(error);
@@ -34,9 +35,9 @@ export default function Login() {
   }, [inputValues]);
 
   return (
-    <div class="wrapper">
+    <div class='wrapper'>
       <form
-        class="form-signin"
+        class='form-signin'
         onSubmit={(e) => {
           e.preventDefault();
           setInputValues({
@@ -46,22 +47,22 @@ export default function Login() {
           setIsSubmit(true);
         }}
       >
-        <h2 class="form-signin-heading">Please login</h2>
+        <h2 class='form-signin-heading'>Please login</h2>
         <input
-          type="email"
-          class="form-control"
-          name="username"
-          placeholder="Email Address"
+          type='email'
+          class='form-control'
+          name='username'
+          placeholder='Email Address'
           required
         />
         <input
-          type="password"
-          class="form-control"
-          name="password"
-          placeholder="Password"
+          type='password'
+          class='form-control'
+          name='password'
+          placeholder='Password'
           required
         />
-        <button class="btn btn-lg btn-primary btn-block" type="submit">
+        <button class='btn btn-lg btn-primary btn-block' type='submit'>
           Login
         </button>
         <hr />
@@ -69,7 +70,7 @@ export default function Login() {
         <LoginFB />
         <br />
         <br />
-        <a className="form-signup" href="/signup">
+        <a className='form-signup' href='/signup'>
           Đăng ký tài khoản
         </a>
       </form>

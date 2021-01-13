@@ -36,9 +36,9 @@ function Homepage(props) {
   };
 
   useEffect(() => {
-    socket.emit("onlineUser", localStorage.getItem("username"));
+    socket.emit("onlineUser", localStorage.getItem("email"));
     return () => {
-      socket.emit("offlineUser", localStorage.getItem("username"));
+      socket.emit("offlineUser", localStorage.getItem("email"));
     };
   }, []);
 
@@ -53,11 +53,11 @@ function Homepage(props) {
 
   socket.on("onlineList", (data) => {
     debugger;
-    let usernameList = [];
+    let emailList = [];
     Object.keys(data).map((socketId) => {
-      usernameList.push(data[socketId]);
+      emailList.push(data[socketId]);
     });
-    setOnlineUser(usernameList);
+    setOnlineUser(emailList);
   });
 
   socket.on("onlineRooms", (roomList) => {
@@ -68,32 +68,32 @@ function Homepage(props) {
     <div>
       <NavBar></NavBar>
       <br />
-      <div className="ml-5 listroom" style={{ width: "75%" }}>
-        <div className="bar">
-          <div className="searchbar">
-            <div className="input">
+      <div className='ml-5 listroom' style={{ width: "75%" }}>
+        <div className='bar'>
+          <div className='searchbar'>
+            <div className='input'>
               <input
                 onChange={(evt) => setKey(evt.target.value)}
-                type="text"
-                class="form-control"
-                placeholder="Search..."
-                required="true"
-                autofocus=""
+                type='text'
+                class='form-control'
+                placeholder='Search...'
+                required='true'
+                autofocus=''
                 value={key}
               ></input>
             </div>
           </div>
-          <div className="new">
+          <div className='new'>
             <button
-              type="button"
-              class="btn btn-danger"
+              type='button'
+              class='btn btn-danger'
               onClick={() => handleCreateNewRoom()}
             >
               New Room
             </button>
           </div>
         </div>
-        <Row class="row-board" style={{ marginTop: "4%" }}>
+        <Row class='row-board' style={{ marginTop: "4%" }}>
           <Col xs={4} style={{ marginBottom: "4%" }}>
             <PlayNow history={history}></PlayNow>
           </Col>
@@ -122,7 +122,7 @@ function Homepage(props) {
           })()}
         </Row>
       </div>
-      <div className="onlineboard">
+      <div className='onlineboard'>
         <Online online={onlineUser}></Online>
       </div>
     </div>
