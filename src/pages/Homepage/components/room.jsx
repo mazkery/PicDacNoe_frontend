@@ -7,12 +7,15 @@ export default function Room({ history, id }) {
     if (localStorage.getItem("token") === null) {
       history.push("/signin");
     } else {
-        socket.emit("joinRoom",id);
+      socket.emit("joinRoom", {
+        roomId: id,
+        name: localStorage.getItem("name"),
+      });
       history.push(`/game/${id}`);
     }
   };
   return (
-    <div className="room" onClick={() => handleClick()}>
+    <div className='room' onClick={() => handleClick()}>
       {id}
     </div>
   );

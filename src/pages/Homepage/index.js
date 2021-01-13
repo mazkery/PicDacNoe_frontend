@@ -27,7 +27,6 @@ function Homepage(props) {
           break;
         }
       }
-      debugger;
       let newRoomList = roomList;
       newRoomList.push(id);
       setNewRoomId(id);
@@ -36,10 +35,7 @@ function Homepage(props) {
   };
 
   useEffect(() => {
-    socket.emit("onlineUser", localStorage.getItem("email"));
-    return () => {
-      socket.emit("offlineUser", localStorage.getItem("email"));
-    };
+    socket.emit("onlineUser", localStorage.getItem("name"));
   }, []);
 
   useEffect(() => {
@@ -52,12 +48,11 @@ function Homepage(props) {
   }, [newRoomId]);
 
   socket.on("onlineList", (data) => {
-    debugger;
-    let emailList = [];
+    let nameList = [];
     Object.keys(data).map((socketId) => {
-      emailList.push(data[socketId]);
+      nameList.push(data[socketId]);
     });
-    setOnlineUser(emailList);
+    setOnlineUser(nameList);
   });
 
   socket.on("onlineRooms", (roomList) => {

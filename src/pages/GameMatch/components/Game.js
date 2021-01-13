@@ -118,11 +118,15 @@ function Game() {
     } else {
       setStart(false);
       //Goi len socket cho biet bat dau game
-      socket.emit(roomId, { label: "headStart" });
+      socket.emit("localRoom", { label: "headStart" });
     }
   };
 
   useEffect(() => {
+    let currentUrl = window.location.href;
+    let matches = currentUrl.match(/:\/\/(?:www\.)?(.[^/]+)(.*)/);
+    setRoomId(matches[matches.length]);
+
     return () => {
       socket.emit("leaveRoom", roomId);
     };
@@ -142,7 +146,7 @@ function Game() {
     //Neu co doi thu tham gia
     if (message.label === "opponent") {
       // Xu ly hien thi doi thu và ready để start game
-      setCompetitor(message.email);
+      setCompetitor(message.name);
     }
 
     if (message.label === "start") {
@@ -206,7 +210,7 @@ function Game() {
         return element;
       })()}
       <div>
-        <ChatBox></ChatBox>
+        <ChatBox socket={socket}></ChatBox>
       </div>
     </div>
   );

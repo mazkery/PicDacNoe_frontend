@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Dropdown, DropdownButton } from 'react-bootstrap';
-import { Link } from 'react-router-dom'
+import { Dropdown, DropdownButton } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import "./navbar.css";
 import {
   Navbar,
@@ -16,24 +16,24 @@ export default function NavBar() {
   return (
     <div>
       <div>
-        <Navbar className="Navbar">
-          <Navbar.Brand href="/">PicDacNoe</Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="mr-auto">
-              <Nav.Link href="/editpassword">EditPassword</Nav.Link>
+        <Navbar className='Navbar'>
+          <Navbar.Brand href='/'>PicDacNoe</Navbar.Brand>
+          <Navbar.Toggle aria-controls='basic-navbar-nav' />
+          <Navbar.Collapse id='basic-navbar-nav'>
+            <Nav className='mr-auto'>
+              <Nav.Link href='/editpassword'>EditPassword</Nav.Link>
             </Nav>
             {(() => {
-              if (localStorage.getItem('token') === null) {
+              if (localStorage.getItem("token") === null) {
                 return (
                   <div>
-                    <a href="/signup">
-                      <button type="button" class="btn btn-info">
+                    <a href='/signup'>
+                      <button type='button' class='btn btn-info'>
                         Sign up
                       </button>
                     </a>
-                    <a href="/signin">
-                      <button type="button" class="btn btn-outline-success">
+                    <a href='/signin'>
+                      <button type='button' class='btn btn-outline-success'>
                         Sign in
                       </button>
                     </a>
@@ -44,16 +44,30 @@ export default function NavBar() {
                   <DropdownButton
                     alignRight
                     variant='info'
-                    title={localStorage.getItem('username')}
+                    title={localStorage.getItem("name")}
                   >
-                    <Dropdown.Item tag={Link} href={'/' + localStorage.getItem('username')}>Profile</Dropdown.Item>
-                    <Dropdown.Item tag={Link} href="/ranking">Ranking</Dropdown.Item>
+                    <Dropdown.Item
+                      tag={Link}
+                      href={"/" + localStorage.getItem("name")}
+                    >
+                      Profile
+                    </Dropdown.Item>
+                    <Dropdown.Item tag={Link} href='/ranking'>
+                      Ranking
+                    </Dropdown.Item>
                     <Dropdown.Divider />
-                    <Dropdown.Item tag={Link} hreft='/' onClick={() => {
-                      window.localStorage.removeItem('username');
-                      window.localStorage.removeItem('token');
-                      window.location.reload()
-                    }} eventKey="4">Log out</Dropdown.Item>
+                    <Dropdown.Item
+                      tag={Link}
+                      hreft='/'
+                      onClick={() => {
+                        window.localStorage.removeItem("name");
+                        window.localStorage.removeItem("token");
+                        window.location.reload();
+                      }}
+                      eventKey='4'
+                    >
+                      Log out
+                    </Dropdown.Item>
                   </DropdownButton>
                 );
               }
@@ -61,6 +75,6 @@ export default function NavBar() {
           </Navbar.Collapse>
         </Navbar>
       </div>
-    </div >
+    </div>
   );
 }
