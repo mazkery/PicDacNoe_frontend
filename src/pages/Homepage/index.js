@@ -8,7 +8,6 @@ import Room from "./components/room";
 import Online from "./components/online";
 import socket from "../../socket/socket";
 import "./index.css";
-const room = 1;
 
 function Homepage(props) {
   const history = useHistory();
@@ -18,10 +17,9 @@ function Homepage(props) {
   const [key, setKey] = useState("");
 
   const handleCreateNewRoom = () => {
-    if (localStorage.getItem('token') === null) {
-      history.push('/signin');
-    }
-    else {
+    if (localStorage.getItem("token") === null) {
+      history.push("/signin");
+    } else {
       let id = 1;
       let numberOfRoom = roomList.length;
       for (id = 1; id <= numberOfRoom; id++) {
@@ -38,7 +36,7 @@ function Homepage(props) {
   };
 
   useEffect(() => {
-      socket.emit("onlineUser", localStorage.getItem("username"));
+    socket.emit("onlineUser", localStorage.getItem("username"));
     return () => {
       socket.emit("offlineUser", localStorage.getItem("username"));
     };
@@ -62,7 +60,7 @@ function Homepage(props) {
     setOnlineUser(usernameList);
   });
 
-  socket.on("onlineRoom", (roomList) => {
+  socket.on("onlineRooms", (roomList) => {
     setRoomList(roomList);
   });
 

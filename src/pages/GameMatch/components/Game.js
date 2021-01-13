@@ -3,10 +3,11 @@ import Board from './Board.js';
 import { calculateWinner } from '../CalculateWinner.service.js';
 import '../GameMatch.css';
 import ChatBox from './chatbox'
+import socket from '../../../socket/socket';
 import CountDown from './countdown'
 
 function Game() {
-	const [competitor, setCompetitor] = useState('meolamphong');
+	const [competitor, setCompetitor] = useState();
 	const [start, setStart] = useState(true);
 	function getInitialState(size) {
 		return {
