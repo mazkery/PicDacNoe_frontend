@@ -5,12 +5,10 @@
   text-align: center;
 }
 .game {
-  float: left;
-  margin-left: 1%;
 }
 .result {
   color: #5c95ff;
-  float: right;
+  display: inline-block;
   margin-right: 1%;
 }
 .ranking {
@@ -20,7 +18,10 @@
   -webkit-overflow-scrolling: touch;
 }
 .user {
+  margin-left: 1%;
+  width: 100%;
   color: black;
+  display: inline-block;
 }
 .user:hover {
   color: black;

@@ -12,7 +12,6 @@ export default function Register() {
     debugger;
     if (isSubmit === true) {
       if (submitInfo.password !== submitInfo.confirmPassword) {
-        console.log('hiiii');
         alert("Password do not match!");
       } else {
         const data = {
@@ -24,17 +23,17 @@ export default function Register() {
         axios
           .post(localStorage.getItem('API') + 'signup', data)
           .then(function (response) {
-            console.log('hiii');
-            console.log(response);
-            alert(response.data.message);
-            localStorage.setItem('username', response.data.user.name);
-            localStorage.setItem('token', response.data.user.token);
+          })
+          .catch(function (error) {
+            alert(error.message);
+          });
+        axios.post(localStorage.getItem('API') + 'email', { 'email': submitInfo.email })
+          .then(function (response) {
+            alert('Go to your email to confirm sign up!');
             history.push('/');
           })
           .catch(function (error) {
-            console.log('haaa');
-            console.log(error);
-            alert(error.message);
+            alert(error.muessage);
           });
       }
       setIsSubmit(false);
@@ -115,10 +114,14 @@ export default function Register() {
                   placeholder="Confirm password"
                   required
                 />
-                <br /><br />
+                <br />
                 <button class="btn btn-lg btn-primary btn-block" type="submit">
                   Register
                 </button>
+                <br />
+                <a className='form-signup' href='/signin'>
+                  Sign in
+        </a>
               </form>
             </div>
           )

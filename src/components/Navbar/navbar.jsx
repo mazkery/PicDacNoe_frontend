@@ -21,7 +21,9 @@ export default function NavBar() {
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
             <Nav className='mr-auto'>
-              <Nav.Link href='/editpassword'>EditPassword</Nav.Link>
+              <Nav.Link href={"/editpassword/" + localStorage.getItem("id")}>
+                EditPassword
+              </Nav.Link>
             </Nav>
             {(() => {
               if (localStorage.getItem("token") === null) {
@@ -48,7 +50,7 @@ export default function NavBar() {
                   >
                     <Dropdown.Item
                       tag={Link}
-                      href={"/" + localStorage.getItem("name")}
+                      href={"/" + localStorage.getItem("email")}
                     >
                       Profile
                     </Dropdown.Item>
@@ -60,8 +62,10 @@ export default function NavBar() {
                       tag={Link}
                       hreft='/'
                       onClick={() => {
-                        window.localStorage.removeItem("name");
+                        window.localStorage.removeItem("username");
                         window.localStorage.removeItem("token");
+                        window.localStorage.removeItem("email");
+                        window.localStorage.removeItem("id");
                         window.location.reload();
                       }}
                       eventKey='4'
