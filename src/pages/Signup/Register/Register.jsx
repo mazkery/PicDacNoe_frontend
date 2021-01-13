@@ -12,7 +12,6 @@ export default function Register() {
     debugger;
     if (isSubmit === true) {
       if (submitInfo.password !== submitInfo.confirmPassword) {
-        console.log('hiiii');
         alert("Password do not match!");
       } else {
         const data = {
@@ -115,10 +114,14 @@ export default function Register() {
                   placeholder="Confirm password"
                   required
                 />
-                <br /><br />
+                <br />
                 <button class="btn btn-lg btn-primary btn-block" type="submit">
                   Register
                 </button>
+                <br />
+                <a className='form-signup' href='/signin'>
+                  Sign in
+        </a>
               </form>
             </div>
           )
