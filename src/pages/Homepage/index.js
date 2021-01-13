@@ -90,7 +90,7 @@ function Homepage(props) {
         </div>
         <Row class='row-board' style={{ marginTop: "4%" }}>
           <Col xs={4} style={{ marginBottom: "4%" }}>
-            <PlayNow history={history}></PlayNow>
+            <PlayNow history={history} roomList={roomList}></PlayNow>
           </Col>
           {(() => {
             const elements = [];
