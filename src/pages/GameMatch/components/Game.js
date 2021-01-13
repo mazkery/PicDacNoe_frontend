@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import Board from './Board.js';
 import { calculateWinner } from '../CalculateWinner.service.js';
 import '../GameMatch.css';
-import ChatBox from './chatbox'
+import ChatBox from './chatbox';
 import socket from '../../../socket/socket';
-import CountDown from './countdown'
+import CountDown from './countdown';
+import { saveGameHistory } from '../../../api';
 
 function Game() {
 	const [competitor, setCompetitor] = useState();
@@ -59,21 +60,21 @@ function Game() {
 	const win = calculateWinner(current.squares, current.savedMove[0], current.savedMove[1]);
 
 	// JSX: Move List
-	const moves = historyArray.map((step, move) => {
-		const desc = move ? 'Go to square [' + step.savedMove + ']' : 'Go to game start';
-		return (
-			<li key={move}>
-				<button
-					className={
-						'btn btn-outline-secondary ' + (move === theGame.stepNumber ? 'font-weight-bolder' : '')
-					}
-					onClick={() => jumpTo(move)}
-				>
-					{desc}
-				</button>
-			</li>
-		);
-	});
+	// const moves = historyArray.map((step, move) => {
+	// 	const desc = move ? 'Go to square [' + step.savedMove + ']' : 'Go to game start';
+	// 	return (
+	// 		<li key={move}>
+	// 			<button
+	// 				className={
+	// 					'btn btn-outline-secondary ' + (move === theGame.stepNumber ? 'font-weight-bolder' : '')
+	// 				}
+	// 				onClick={() => jumpTo(move)}
+	// 			>
+	// 				{desc}
+	// 			</button>
+	// 		</li>
+	// 	);
+	// });
 	// const historyMovesList = theGame.listAscending ? (
 	// 	<ol start='0'>{moves}</ol>
 	// ) : (
@@ -87,6 +88,8 @@ function Game() {
 	if (win) {
 		alert(win.winner + ' is winner!');
 		status = 'Winner:' + win.winner;
+		// localStorage.getItem('username')
+		saveGameHistory({ squares: current.squares, win });
 	} else {
 		if (theGame.stepNumber === theGame.boardSize * theGame.boardSize) {
 			status = "It's a tie";
@@ -96,54 +99,59 @@ function Game() {
 	}
 	const surrender = () => {
 		alert('Surrender');
-	}
+	};
 	const equalize = () => {
 		alert('Equalize');
-	}
+	};
 	const startGame = () => {
 		if (competitor === null) {
-			alert('Wait for your competitor!');
-		}
-		else {
+			alert('Wait	 for your competitor!');
+		} else {
 			setStart(false);
 		}
-	}
-	useEffect(() => { })
+	};
+	useEffect(() => {});
 	return (
 		<div>
 			{(() => {
 				const element = [];
 				if (start === true) {
 					element.push(
-						<div className='start-button' onClick={() => startGame()} >
-							<button type="button" class="btn btn-danger" style={{fontSize:'30px',width:'10%'}}> START</button>
+						<div className='start-button' onClick={() => startGame()}>
+							<button
+								type='button'
+								class='btn btn-danger'
+								style={{ fontSize: '30px', width: '10%' }}
+							>
+								{' '}
+								START
+							</button>
 						</div>
 					);
-				}
-				else {
+				} else {
 					element.push(
 						<div style={{ textAlign: 'left' }}>
 							<div className='game-info '>
 								<div className='alert alert-primary'>{status}</div>
 							</div>
-							<div className="board">
+							<div className='board'>
 								<Board
 									squares={current.squares}
 									onClick={(r, c) => handleClickSquare(r, c)}
 									highLightSquares={win ? win.line : []}
 								/>
 							</div>
-							<div className="at-right">
+							<div className='at-right'>
 								<div className='action'>
 									<div className='action-button' onClick={() => surrender()}>
 										<div className='flag'>
-											<i class="fas fa-flag"></i>
+											<i class='fas fa-flag'></i>
 										</div>
 										<div>Surrender</div>
 									</div>
 									<div className='action-button' onClick={() => equalize()}>
 										<div className='deal'>
-											<i class="fas fa-american-sign-language-interpreting"></i>
+											<i class='fas fa-american-sign-language-interpreting'></i>
 										</div>
 										<div>Request a Draw</div>
 									</div>
