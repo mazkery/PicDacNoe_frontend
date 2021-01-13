@@ -35,12 +35,21 @@ function Homepage(props) {
 		}
 	};
 
+<<<<<<< HEAD
 	useEffect(() => {
 		socket.emit('onlineUser', localStorage.getItem('username'));
 		return () => {
 			socket.emit('offlineUser', localStorage.getItem('username'));
 		};
 	}, []);
+=======
+  useEffect(() => {
+    socket.emit("onlineUser", localStorage.getItem("email"));
+    return () => {
+      socket.emit("offlineUser", localStorage.getItem("email"));
+    };
+  }, []);
+>>>>>>> 7e44cbf31de7daf911f61bbea3f77ef4e5080a6c
 
 	useEffect(() => {
 		if (newRoomId > 0) {
@@ -51,6 +60,7 @@ function Homepage(props) {
 		}
 	}, [newRoomId]);
 
+<<<<<<< HEAD
 	socket.on('onlineList', (data) => {
 		debugger;
 		let usernameList = [];
@@ -59,11 +69,22 @@ function Homepage(props) {
 		});
 		setOnlineUser(usernameList);
 	});
+=======
+  socket.on("onlineList", (data) => {
+    debugger;
+    let emailList = [];
+    Object.keys(data).map((socketId) => {
+      emailList.push(data[socketId]);
+    });
+    setOnlineUser(emailList);
+  });
+>>>>>>> 7e44cbf31de7daf911f61bbea3f77ef4e5080a6c
 
 	socket.on('onlineRooms', (roomList) => {
 		setRoomList(roomList);
 	});
 
+<<<<<<< HEAD
 	return (
 		<div>
 			<NavBar></NavBar>
@@ -123,6 +144,71 @@ function Homepage(props) {
 			</div>
 		</div>
 	);
+=======
+  return (
+    <div>
+      <NavBar></NavBar>
+      <br />
+      <div className='ml-5 listroom' style={{ width: "75%" }}>
+        <div className='bar'>
+          <div className='searchbar'>
+            <div className='input'>
+              <input
+                onChange={(evt) => setKey(evt.target.value)}
+                type='text'
+                class='form-control'
+                placeholder='Search...'
+                required='true'
+                autofocus=''
+                value={key}
+              ></input>
+            </div>
+          </div>
+          <div className='new'>
+            <button
+              type='button'
+              class='btn btn-danger'
+              onClick={() => handleCreateNewRoom()}
+            >
+              New Room
+            </button>
+          </div>
+        </div>
+        <Row class='row-board' style={{ marginTop: "4%" }}>
+          <Col xs={4} style={{ marginBottom: "4%" }}>
+            <PlayNow history={history}></PlayNow>
+          </Col>
+          {(() => {
+            const elements = [];
+            if (!key) {
+              roomList.map((roomId) =>
+                elements.push(
+                  <Col xs={4} style={{ marginBottom: "4%" }}>
+                    <Room history={history} id={roomId}></Room>
+                  </Col>
+                )
+              );
+            } else {
+              roomList.map((roomId) => {
+                if (roomId === key) {
+                  elements.push(
+                    <Col xs={4} style={{ marginBottom: "4%" }}>
+                      <Room history={history} id={roomId}></Room>
+                    </Col>
+                  );
+                }
+              });
+            }
+            return elements;
+          })()}
+        </Row>
+      </div>
+      <div className='onlineboard'>
+        <Online online={onlineUser}></Online>
+      </div>
+    </div>
+  );
+>>>>>>> 7e44cbf31de7daf911f61bbea3f77ef4e5080a6c
 }
 
 export default Homepage;

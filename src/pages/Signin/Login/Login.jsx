@@ -14,6 +14,7 @@ export default function Login() {
 	const [isSubmit, setIsSubmit] = useState(false);
 	const history = useHistory();
 
+<<<<<<< HEAD
 	useEffect(() => {
 		if (isSubmit) {
 			const data = inputValues;
@@ -77,4 +78,68 @@ export default function Login() {
 			</form>
 		</div>
 	);
+=======
+  useEffect(() => {
+    if (isSubmit) {
+      const data = inputValues;
+      login(data)
+        .then((res) => {
+          console.log(res);
+          // alert(res.data.info.message);
+          localStorage.setItem("token", res.data.user.token);
+          localStorage.setItem("name", res.data.user.name);
+          localStorage.setItem("email", res.data.user.email);
+          history.push("/");
+        })
+        .catch((error) => {
+          console.log(error);
+          alert(error.response.data.message.message);
+          // setErrorMessage(error.response.data.message);
+        });
+    }
+  }, [inputValues]);
+
+  return (
+    <div class='wrapper'>
+      <form
+        class='form-signin'
+        onSubmit={(e) => {
+          e.preventDefault();
+          setInputValues({
+            email: e.currentTarget.username.value,
+            password: e.currentTarget.password.value,
+          });
+          setIsSubmit(true);
+        }}
+      >
+        <h2 class='form-signin-heading'>Please login</h2>
+        <input
+          type='email'
+          class='form-control'
+          name='username'
+          placeholder='Email Address'
+          required
+        />
+        <input
+          type='password'
+          class='form-control'
+          name='password'
+          placeholder='Password'
+          required
+        />
+        <button class='btn btn-lg btn-primary btn-block' type='submit'>
+          Login
+        </button>
+        <hr />
+        <LoginGG />
+        <LoginFB />
+        <br />
+        <br />
+        <a className='form-signup' href='/signup'>
+          Đăng ký tài khoản
+        </a>
+      </form>
+    </div>
+  );
+>>>>>>> 7e44cbf31de7daf911f61bbea3f77ef4e5080a6c
 }

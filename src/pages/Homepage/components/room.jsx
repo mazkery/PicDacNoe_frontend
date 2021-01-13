@@ -7,6 +7,7 @@ export default function Room({ history, id }) {
     if (localStorage.getItem("token") === null) {
       history.push("/signin");
     } else {
+        socket.emit("joinRoom",id);
       history.push(`/game/${id}`);
     }
   };
