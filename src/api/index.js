@@ -48,9 +48,20 @@ export const saveGameHistory = async (data) => {
 
 /**
  * Send email confirmation
- * @param {} data
+ * {email}
  */
-
+export const sendEmailConfirmation = async (data) => {
+	return new Promise((resolve, reject) => {
+		instance
+			.post('/email', data)
+			.then((res) => {
+				resolve(res);
+			})
+			.catch((error) => {
+				reject(error);
+			});
+	});
+};
 /**
  * Confirmed email
  */
