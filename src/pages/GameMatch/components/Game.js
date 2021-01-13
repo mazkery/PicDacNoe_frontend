@@ -142,7 +142,7 @@ function Game() {
   });
 
   // Nhan thong diep trong phong
-  socket.on(roomId, (message) => {
+  socket.on("gameInfo", (message) => {
     //Neu co doi thu tham gia
     if (message.label === "opponent") {
       // Xu ly hien thi doi thu và ready để start game
