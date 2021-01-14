@@ -69,7 +69,7 @@ export default function ChatBox(props) {
       <Widget
         id='chat'
         handleNewUserMessage={handleNewUserMessage}
-        title={socket.id}
+        title='Chat'
         subtitle={null}
       />
     </div>
