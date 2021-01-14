@@ -46,7 +46,7 @@ export default function NavBar() {
                   <DropdownButton
                     alignRight
                     variant='info'
-                    title={localStorage.getItem("username")}
+                    title={localStorage.getItem("name")}
                   >
                     <Dropdown.Item
                       tag={Link}

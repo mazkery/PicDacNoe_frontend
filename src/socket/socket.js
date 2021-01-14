@@ -1,5 +1,5 @@
 import socketIOClient from "socket.io-client";
-const ENDPOINT = "http://localhost:5000";
+const ENDPOINT = " https://protected-dusk-54874.herokuapp.com/ ";
 const socket = socketIOClient(ENDPOINT);
 
 export default socket;
