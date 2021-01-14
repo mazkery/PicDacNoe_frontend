@@ -1,10 +1,10 @@
 import axios from 'axios';
-const API_SERVER = ' https://protected-dusk-54874.herokuapp.com/ ';
+const API_SERVER = 'https://protected-dusk-54874.herokuapp.com/';
 let instance = axios.create({
 	withCredentials: true,
 	baseURL: API_SERVER,
 });
-localStorage.setItem('API', ' https://protected-dusk-54874.herokuapp.com/ ');
+localStorage.setItem('API', 'https://protected-dusk-54874.herokuapp.com/');
 
 export const login = async (data) => {
 	return new Promise((resolve, reject) => {
